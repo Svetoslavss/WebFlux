@@ -13,7 +13,7 @@ import java.util.LongSummaryStatistics;
 import java.util.StringJoiner;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/customers")
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -23,31 +23,31 @@ public class CustomerController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping("/customer")
+    @PostMapping
      Mono<CustomerResponse> create(@RequestBody Customer customer){
         return customerService.create(customer);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/customer")
+    @GetMapping
      Flux<CustomerResponse> getAllCustomers(){
         return customerService.findAll();
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/customer/{id}")
+    @GetMapping("/{id}")
     public Mono<CustomerResponse> fetCustomerById(@PathVariable Long id){
         return customerService.findById(id);
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/customers/{firstname}/firstname")
+    @GetMapping("/{firstname}")
      Flux<CustomerResponse> getAllByFirstname(@RequestParam String firstname){
         return customerService.findAllByFirstname(firstname);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/customer/{id}")
+    @DeleteMapping("/{id}")
      Mono<?> deleteCustomer(Long id){
         return customerService.deleteById(id);
     }
