@@ -1,22 +1,18 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven 3.6.3' 
-    }
-
     stages {
         stage('Dependencies') {
             steps {
                 echo 'Fetching dependencies...'
-                bat 'mvn clean install -DskipTests' 
+                bat 'mvn clean install -DskipTests'
             }
         }
 
         stage('Build') {
             steps {
                 echo 'Building the project...'
-                bat 'mvn clean package -DskipTests'  
+                bat 'mvn clean package -DskipTests'
             }
         }
 
